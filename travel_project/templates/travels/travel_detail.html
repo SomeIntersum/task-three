@@ -1,0 +1,42 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1>{{ travel.title }}</h1>
+
+    {% if travel.images.all %}
+        <div class="travel-images">
+            {% for image in travel.images.all %}
+                <div class="travel-image-item">
+                    <img src="{{ image.image.url }}" alt="{{ image.caption }}" class="travel-image">
+                    {% if image.caption %}
+                        <p class="image-caption">{{ image.caption }}</p>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <p><strong>Местоположение:</strong> {{ travel.location }}</p>
+    {% if travel.latitude and travel.longitude %}
+        <p><strong>Геопозиция:</strong> {{ travel.latitude }}, {{ travel.longitude }}</p>
+    {% endif %}
+    <p><strong>Описание:</strong> {{ travel.description }}</p>
+    <p><strong>Стоимость:</strong> {{ travel.cost }} руб.</p>
+    <p><strong>Места культурного наследия:</strong> {{ travel.heritage_sites }}</p>
+    <p><strong>Рекомендуемые места для посещения:</strong> {{ travel.recommended_places }}</p>
+    <p><strong>Оценка удобства передвижения:</strong> {{ travel.convenience_rating }}</p>
+    {% if travel.safety_rating %}
+        <p><strong>Оценка безопасности:</strong> {{ travel.safety_rating }}</p>
+    {% endif %}
+    {% if travel.population_density_rating %}
+        <p><strong>Оценка населенности:</strong> {{ travel.population_density_rating }}</p>
+    {% endif %}
+    {% if travel.vegetation_rating %}
+        <p><strong>Оценка растительности:</strong> {{ travel.vegetation_rating }}</p>
+    {% endif %}
+    <p><strong>Дата создания:</strong> {{ travel.created_at }}</p>
+
+    <a href="{% url 'user_detail' travel.user.id %}" class="btn">Вернуться к профилю пользователя</a>
+</div>
+{% endblock %}

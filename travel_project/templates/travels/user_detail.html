@@ -1,0 +1,19 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+    <h1>Профиль пользователя: {{ user.username }}</h1>
+
+    <h2>Путешествия:</h2>
+    <ul>
+        {% for travel in travels %}
+            <li>
+                <a href="{% url 'travel_detail' travel.id %}">{{ travel.title }}</a>
+                - {{ travel.location }} - {{ travel.cost }} руб.
+            </li>
+        {% empty %}
+            <li>У пользователя пока нет путешествий.</li>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'home' %}">Вернуться на главную</a>
+{% endblock %}

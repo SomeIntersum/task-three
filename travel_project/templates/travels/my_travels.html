@@ -1,0 +1,22 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1>Мои путешествия</h1>
+
+    <a href="{% url 'create_travel' %}" class="btn">Добавить новое путешествие</a>
+
+    <ul>
+        {% for travel in travels %}
+            <li>
+                <a href="{% url 'travel_detail' travel.id %}">{{ travel.title }}</a>
+                - {{ travel.location }} - {{ travel.cost }} руб.
+            </li>
+        {% empty %}
+            <li>У вас пока нет путешествий.</li>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'home' %}" class="btn">Вернуться на главную</a>
+</div>
+{% endblock %}
